@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import Image from 'next/image'
 import { resolveHref } from '@/sanity/lib/utils'
 import type { MenuItem, SettingsPayload } from '@/types'
 
@@ -17,17 +17,17 @@ export default function Navbar(props: NavbarProps) {
           if (!href) {
             return null
           }
-          return (
+          return menuItem?._type === 'home' ? (
+            <Link key={key} href={href}>
+              <Image src="/PinkReist.png" height={76} width={357} alt="" />
+            </Link>
+          ) : (
             <Link
               key={key}
-              className={`text-lg hover:text-black md:text-xl ${
-                menuItem?._type === 'home'
-                  ? 'font-extrabold text-black'
-                  : 'text-gray-600'
-              }`}
+              className={`text-lg hover:text-black md:text-xl text-gray-600`}
               href={href}
             >
-              {menuItem.title}
+              {menuItem?.title}
             </Link>
           )
         })}

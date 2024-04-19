@@ -1,6 +1,8 @@
 import './globals.css'
 
 import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
+import Alex from 'next/font/local'
+import Rockkitt from 'next/font/local'
 
 const serif = PT_Serif({
   variable: '--font-serif',
@@ -20,6 +22,16 @@ const mono = IBM_Plex_Mono({
   weight: ['500', '700'],
 })
 
+const alex = Alex({
+  src: '../public/AlexBrush-Regular.ttf',
+  variable: '--font-alex',
+})
+
+const rockkitt = Rockkitt({
+  src: '../public/Rokkitt-VariableFont_wght.ttf',
+  variable: '--font-rockkitt',
+})
+
 export default async function RootLayout({
   children,
 }: {
@@ -28,9 +40,11 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${mono.variable} ${sans.variable} ${serif.variable}`}
+      className={`${mono.variable} ${sans.variable} ${serif.variable} ${alex.variable} ${rockkitt.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <div style={{ backgroundColor: '#eadbcb' }}>{children}</div>
+      </body>
     </html>
   )
 }

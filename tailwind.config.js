@@ -14,7 +14,10 @@ module.exports = {
       mono: 'var(--font-mono)',
       sans: 'var(--font-sans)',
       serif: 'var(--font-serif)',
+      alex: 'var(--font-alex)',
+      rockkitt: 'var(--font-rockkitt)',
     },
+    backgroundColor: '#eadbcb',
   },
   plugins: [require('@tailwindcss/typography')],
 }
