@@ -17,7 +17,7 @@ export function Header(props: HeaderProps) {
       <div className="w-5/6 lg:w-3/5">
         {/* Title */}
         {title && (
-          <div className="text-3xl font-alex tracking-tight md:text-5xl text-[#EE4286]">
+          <div className="text-3xl font-alex md:text-5xl text-[#EE4286]">
             {title}
           </div>
         )}

@@ -44,7 +44,7 @@ export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
                 classesWrapper="relative aspect-auto"
               />
             </div>
-            <div className="place-content-center ml-4">
+            <div className="place-content-center ml-4 flex flex-col w-full">
               {/* Header */}
               <Header title={title} />
               <div className="font-rockkitt text-lg">
