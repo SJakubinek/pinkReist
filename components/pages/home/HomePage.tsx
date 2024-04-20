@@ -15,8 +15,6 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
   // Default to an empty object to allow previews on non-existent documents
   const { overview = [], showcaseBlogs = [], title = '' } = data ?? {}
 
-  console.log('DATA: ' + JSON.stringify(data))
-
   return (
     <div className="space-y-20">
       {/* Header */}

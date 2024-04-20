@@ -21,7 +21,6 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { data: blog } = await loadBlog(params.slug)
-  console.log('DATA: ' + JSON.stringify(blog))
   const ogImage = urlForOpenGraphImage(blog?.coverImage)
 
   return {

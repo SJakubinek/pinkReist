@@ -7,56 +7,70 @@ import ImageBox from '@/components/shared/ImageBox'
 import type { BlogPayload } from '@/types'
 
 export interface BlogPageProps {
-  data: BlogPayload | null
+  data: BlogPayload
   encodeDataAttribute?: EncodeDataAttributeCallback
 }
 
 export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { title, overview, coverImage, createdAt, tags, body } = data ?? {}
+  const {
+    title,
+    overview,
+    coverImage,
+    coverImageHeight,
+    coverImageWidth,
+    coverImageAlt,
+    coverImageCaption,
+    createdAt,
+    tags,
+    body,
+  } = data ?? {}
 
+  const createdDate = new Date(createdAt)
   return (
     <div>
-      <div className="mb-20 space-y-6">
-        {/* Header */}
-        <Header title={title} description={overview} />
-
-        <div className="rounded-md border">
+      <div className="flex flex-row">
+        <div>
           {/* Image  */}
           <ImageBox
             data-sanity={encodeDataAttribute?.('coverImage')}
             image={coverImage}
             // @TODO add alt field in schema
-            alt=""
+            alt={coverImageAlt}
             width={100}
             height={100}
-            classesWrapper="relative aspect-[16/9]"
+            classesWrapper="relative aspect-auto"
           />
-
-          <div className="divide-inherit grid grid-cols-1 divide-y lg:grid-cols-4 lg:divide-x lg:divide-y-0">
-            {/* Tags */}
-            <div className="p-3 lg:p-4">
-              <div className="text-xs md:text-sm">Tags</div>
-              <div className="text-md flex flex-row flex-wrap md:text-lg">
-                {tags?.map((tag, key) => (
-                  <div key={key} className="mr-1 break-words ">
-                    #{tag}
-                  </div>
-                ))}
-              </div>
-            </div>
+        </div>
+        <div className="place-content-center ml-4">
+          {/* Header */}
+          <Header title={title} description={overview} />
+          <div className="font-rockkitt text-lg">
+            {createdDate.toLocaleDateString('de-DE')}{' '}
+            {createdDate.toLocaleTimeString('de-DE')}
           </div>
         </div>
-
-        {/* Description */}
-        {body && (
-          <CustomPortableText
-            paragraphClasses="font-serif max-w-3xl text-xl text-gray-600"
-            value={body}
-          />
-        )}
       </div>
-      <div className="absolute left-0 w-screen border-t" />
+      <div>
+        {/* Tags */}
+        <div className="py-3 lg:py-4 font-rockkitt">
+          <div className="text-xs md:text-sm">Tags</div>
+          <div className="text-md flex flex-row flex-wrap md:text-lg">
+            {tags?.map((tag, key) => (
+              <div key={key} className="mr-1 break-words">
+                #{tag}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Description */}
+      {body && (
+        <CustomPortableText
+          paragraphClasses="font-rockkitt max-w-3xl text-xl text-gray-600"
+          value={body}
+        />
+      )}
     </div>
   )
 }
