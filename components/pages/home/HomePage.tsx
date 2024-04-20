@@ -19,29 +19,30 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
     <div className="space-y-20">
       {/* Header */}
       {title && <Header centered title={title} description={overview} />}
-      <p>Blogeintr&auml;ge</p>
       {/* Showcase projects */}
       {showcaseBlogs && showcaseBlogs.length > 0 && (
-        <div className="mx-auto max-w-[100rem] rounded-md border">
-          {showcaseBlogs.map((blog, key) => {
-            const href = resolveHref(blog?._type, blog?.slug)
-            if (!href) {
-              return null
-            }
-            return (
-              <Link
-                key={key}
-                href={href}
-                data-sanity={encodeDataAttribute?.([
-                  'showcaseBlogss',
-                  key,
-                  'slug',
-                ])}
-              >
-                <BlogListItem blog={blog} odd={key % 2} />
-              </Link>
-            )
-          })}
+        <div className="flex flex-col items-center">
+          <div className="w-5/6 lg:w-3/5">
+            {showcaseBlogs.map((blog, key) => {
+              const href = resolveHref(blog?._type, blog?.slug)
+              if (!href) {
+                return null
+              }
+              return (
+                <Link
+                  key={key}
+                  href={href}
+                  data-sanity={encodeDataAttribute?.([
+                    'showcaseBlogss',
+                    key,
+                    'slug',
+                  ])}
+                >
+                  <BlogListItem blog={blog} odd={key % 2} />
+                </Link>
+              )
+            })}
+          </div>
         </div>
       )}
     </div>

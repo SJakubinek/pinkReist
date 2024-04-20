@@ -46,7 +46,7 @@ export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
             </div>
             <div className="place-content-center ml-4">
               {/* Header */}
-              <Header title={title} description={overview} />
+              <Header title={title} />
               <div className="font-rockkitt text-lg">
                 {createdDate.toLocaleDateString('de-DE')}{' '}
                 {createdDate.toLocaleTimeString('de-DE')}

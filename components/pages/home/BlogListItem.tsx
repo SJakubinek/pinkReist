@@ -13,21 +13,16 @@ export function BlogListItem(props: BlogProps) {
   const { blog, odd } = props
 
   return (
-    <div
-      className={`flex flex-col gap-x-5 p-2 transition hover:bg-gray-50/50 xl:flex-row ${
-        odd && 'border-b border-t xl:flex-row-reverse'
-      }`}
-    >
-      <div className="w-full xl:w-9/12">
+    <div className="pb-6 flex flex-row">
+      <div className="basis-1/4">
         <ImageBox
           image={blog.coverImage}
           alt={blog.coverImageAlt}
-          classesWrapper="relative aspect-auto"
-          width={blog.coverImageWidth}
-          height={blog.coverImageHeight}
+          width={100}
+          height={100}
         />
       </div>
-      <div className="flex xl:w-1/4">
+      <div className="basis-3/4">
         <TextBox blog={blog} />
       </div>
     </div>
@@ -35,25 +30,25 @@ export function BlogListItem(props: BlogProps) {
 }
 
 function TextBox({ blog }: { blog: ShowcaseBlog }) {
+  const text: string = blog.body[0].children[0].text
+  const trimmedText = text.substring(0, 350) + '...'
   return (
-    <div className="relative mt-2 flex w-full flex-col justify-between p-3 xl:mt-0">
+    <div>
       <div>
         {/* Title */}
-        <div className="mb-2 text-xl font-extrabold tracking-tight md:text-2xl">
+        <div className="mb-1 text-xl font-extrabold tracking-tight md:text-2xl font-rockkitt">
           {blog.title}
         </div>
-        {/* Overview  */}
-        <div className="font-serif text-gray-500">
-          <CustomPortableText value={blog.overview as PortableTextBlock[]} />
+        {/* Tags */}
+        <div className="flex flex-row gap-x-2 font-rockkitt mb-4">
+          {blog.tags?.map((tag, key) => (
+            <div className="text-lg font-medium lowercase" key={key}>
+              #{tag}
+            </div>
+          ))}
         </div>
-      </div>
-      {/* Tags */}
-      <div className="mt-4 flex flex-row gap-x-2">
-        {blog.tags?.map((tag, key) => (
-          <div className="text-sm font-medium lowercase md:text-lg" key={key}>
-            #{tag}
-          </div>
-        ))}
+        {/* Overview  */}
+        <div className="font-rockkitt text-gray-600 text-lg">{trimmedText}</div>
       </div>
     </div>
   )
