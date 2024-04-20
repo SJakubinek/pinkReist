@@ -4,9 +4,15 @@ export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
     overview,
-    showcaseProjects[]->{
+    showcaseBlogs[]->{
       _type,
+      body,
       coverImage,
+      coverImageCaption,
+      coverImageAlt,
+      coverImageWidth,
+      coverImageHeight,
+      createdAt,
       overview,
       "slug": slug.current,
       tags,
@@ -36,6 +42,23 @@ export const projectBySlugQuery = groq`
     overview,
     site,
     "slug": slug.current,
+    tags,
+    title,
+  }
+`
+
+export const blogBySlugQuery = groq`
+  *[_type == "blog" && slug.current == $slug][0] {
+    _id,
+    body,
+    coverImage,
+    coverImageAlt,
+    coverImageCaption,
+    coverImageHeight,
+    coverImageWidth,
+    createdAt,
+    overview,
+    slug,
     tags,
     title,
   }

@@ -1,7 +1,7 @@
 import type { EncodeDataAttributeCallback } from '@sanity/react-loader'
 import Link from 'next/link'
 
-import { ProjectListItem } from '@/components/pages/home/ProjectListItem'
+import { BlogListItem } from '@/components/pages/home/BlogListItem'
 import { Header } from '@/components/shared/Header'
 import { resolveHref } from '@/sanity/lib/utils'
 import type { HomePagePayload } from '@/types'
@@ -13,17 +13,20 @@ export interface HomePageProps {
 
 export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { overview = [], showcaseProjects = [], title = '' } = data ?? {}
+  const { overview = [], showcaseBlogs = [], title = '' } = data ?? {}
+
+  console.log('DATA: ' + JSON.stringify(data))
 
   return (
     <div className="space-y-20">
       {/* Header */}
-      {title && <Header title={title} description={overview} />}
+      {title && <Header centered title={title} description={overview} />}
+      <p>Blogeintr&auml;ge</p>
       {/* Showcase projects */}
-      {showcaseProjects && showcaseProjects.length > 0 && (
+      {showcaseBlogs && showcaseBlogs.length > 0 && (
         <div className="mx-auto max-w-[100rem] rounded-md border">
-          {showcaseProjects.map((project, key) => {
-            const href = resolveHref(project?._type, project?.slug)
+          {showcaseBlogs.map((blog, key) => {
+            const href = resolveHref(blog?._type, blog?.slug)
             if (!href) {
               return null
             }
@@ -32,12 +35,12 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
                 key={key}
                 href={href}
                 data-sanity={encodeDataAttribute?.([
-                  'showcaseProjects',
+                  'showcaseBlogss',
                   key,
                   'slug',
                 ])}
               >
-                <ProjectListItem project={project} odd={key % 2} />
+                <BlogListItem blog={blog} odd={key % 2} />
               </Link>
             )
           })}

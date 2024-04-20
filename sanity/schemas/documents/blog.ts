@@ -2,30 +2,35 @@ import { DocumentIcon, ImageIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
+  name: 'blog',
+  title: 'Blog',
   type: 'document',
-  name: 'page',
-  title: 'Page',
   icon: DocumentIcon,
+  // Uncomment below to have edits publish automatically as you type
+  // liveEdit: true,
   fields: [
     defineField({
-      type: 'string',
       name: 'title',
+      description: 'This field is the title of your project.',
       title: 'Title',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      type: 'slug',
       name: 'slug',
       title: 'Slug',
+      type: 'slug',
       options: {
         source: 'title',
+        maxLength: 96,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'overview',
       description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
+        'Used both for the <meta> description tag for SEO, and project subheader.',
       title: 'Overview',
       type: 'array',
       of: [
@@ -49,16 +54,69 @@ export default defineType({
           type: 'block',
         }),
       ],
-      validation: (rule) => rule.max(155).required(),
+      validation: (rule) => rule.max(155).warning('Less than 155 characters'),
     }),
     defineField({
+      name: 'coverImage',
+      title: 'Cover Image',
+      icon: ImageIcon,
+      description:
+        'This image will be used as the cover image for the project. If you choose to add it to the show case projects, this is the image displayed in the list within the homepage.',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      title: 'Cover Image Caption',
+      name: 'coverImageCaption',
+      type: 'string',
+    }),
+    defineField({
+      name: 'coverImageAlt',
+      type: 'string',
+      title: 'Cover Image Alt Text',
+      description:
+        'Alternative text for screenreaders. Falls back on caption if not set',
+    }),
+    defineField({
+      name: 'coverImageWidth',
+      type: 'number',
+      title: 'Cover Image Width',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'coverImageHeight',
+      type: 'number',
+      title: 'Cover Image Height',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'createdAt',
+      title: 'Created at',
+      type: 'datetime',
+      options: {
+        dateFormat: 'DD-MM-YYYY',
+        timeFormat: 'HH:mm',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
-      description:
-        "This is where you can write the page's content. Including custom blocks like timelines for more a more visual display of information.",
+      type: 'array',
+      validation: (rule) => rule.required(),
       of: [
-        // Paragraphs
         defineArrayMember({
           type: 'block',
           marks: {
@@ -126,15 +184,4 @@ export default defineType({
       ],
     }),
   ],
-  preview: {
-    select: {
-      title: 'title',
-    },
-    prepare({ title }) {
-      return {
-        subtitle: 'Page',
-        title,
-      }
-    },
-  },
 })

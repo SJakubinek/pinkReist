@@ -27,12 +27,27 @@ export interface ShowcaseProject {
   title?: string
 }
 
+export interface ShowcaseBlog {
+  _type: string
+  title: string
+  slug: string
+  overview?: PortableTextBlock[]
+  coverImage: Image
+  coverImageCaption?: string
+  coverImageAlt?: string
+  coverImageWidth: number
+  coverImageHeight: number
+  createdAt: string
+  tags?: string[]
+  body: PortableTextBlock[]
+}
+
 // Page payloads
 
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
-  showcaseProjects?: ShowcaseProject[]
+  showcaseBlogs?: ShowcaseBlog[]
   title?: string
 }
 
@@ -57,6 +72,20 @@ export interface ProjectPayload {
   slug: string
   tags?: string[]
   title?: string
+}
+
+export interface BlogPayload {
+  title: string
+  slug: string
+  overview?: PortableTextBlock[]
+  coverImage: Image
+  coverImageCaption?: string
+  coverImageAlt?: string
+  coverImageWidth: number
+  coverImageHeight: number
+  createdAt: string
+  tags?: string[]
+  body: PortableTextBlock[]
 }
 
 export interface SettingsPayload {

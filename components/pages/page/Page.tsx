@@ -11,15 +11,15 @@ export function Page({ data }: PageProps) {
   const { body, overview, title } = data ?? {}
 
   return (
-    <div>
-      <div className="mb-14">
+    <div className="flex flex-col items-center">
+      <div className="w-5/6 lg:w-3/5">
         {/* Header */}
         <Header title={title} description={overview} />
 
         {/* Body */}
         {body && (
           <CustomPortableText
-            paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+            paragraphClasses="font-rockkitt text-gray-600 text-xl"
             value={body}
           />
         )}

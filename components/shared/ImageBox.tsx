@@ -5,8 +5,8 @@ import { urlForImage } from '@/sanity/lib/utils'
 interface ImageBoxProps {
   image?: { asset?: any }
   alt?: string
-  width?: number
-  height?: number
+  width: number
+  height: number
   size?: string
   classesWrapper?: string
   'data-sanity'?: string
@@ -14,9 +14,9 @@ interface ImageBoxProps {
 
 export default function ImageBox({
   image,
-  alt = 'Cover image',
-  width = 3500,
-  height = 2000,
+  alt = '',
+  width,
+  height,
   size = '100vw',
   classesWrapper,
   ...props
@@ -31,7 +31,7 @@ export default function ImageBox({
     >
       {imageUrl && (
         <Image
-          className="absolute h-full w-full"
+          //className="h-full w-full"
           alt={alt}
           width={width}
           height={height}

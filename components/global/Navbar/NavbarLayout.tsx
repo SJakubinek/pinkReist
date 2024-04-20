@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+
 import { resolveHref } from '@/sanity/lib/utils'
 import type { MenuItem, SettingsPayload } from '@/types'
 

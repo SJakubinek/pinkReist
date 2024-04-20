@@ -8,10 +8,12 @@ import {
   homePageQuery,
   pagesBySlugQuery,
   projectBySlugQuery,
+  blogBySlugQuery,
   settingsQuery,
 } from '@/sanity/lib/queries'
 import { token } from '@/sanity/lib/token'
 import {
+  BlogPayload,
   HomePagePayload,
   PagePayload,
   ProjectPayload,
@@ -91,5 +93,13 @@ export function loadPage(slug: string) {
     pagesBySlugQuery,
     { slug },
     { next: { tags: [`page:${slug}`] } },
+  )
+}
+
+export function loadBlog(slug: string) {
+  return loadQuery<BlogPayload | null>(
+    blogBySlugQuery,
+    { slug },
+    { next: { tags: [`blog:${slug}`] } },
   )
 }
