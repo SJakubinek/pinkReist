@@ -1,5 +1,4 @@
 import type { EncodeDataAttributeCallback } from '@sanity/react-loader'
-import Link from 'next/link'
 
 import { CustomPortableText } from '@/components/shared/CustomPortableText'
 import { Header } from '@/components/shared/Header'
@@ -13,18 +12,7 @@ export interface BlogPageProps {
 
 export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const {
-    title,
-    overview,
-    coverImage,
-    coverImageHeight,
-    coverImageWidth,
-    coverImageAlt,
-    coverImageCaption,
-    createdAt,
-    tags,
-    body,
-  } = data ?? {}
+  const { title, coverImage, coverImageAlt, createdAt, tags, body } = data ?? {}
 
   const createdDate = new Date(createdAt)
   return (

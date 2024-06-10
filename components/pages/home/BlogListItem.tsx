@@ -1,10 +1,7 @@
-import type { PortableTextBlock } from 'next-sanity'
-
-import { CustomPortableText } from '@/components/shared/CustomPortableText'
-import ImageBox from '@/components/shared/ImageBox'
-import type { ShowcaseBlog } from '@/types'
 import Image from 'next/image'
+
 import { urlForImage } from '@/sanity/lib/utils'
+import type { ShowcaseBlog } from '@/types'
 
 interface BlogProps {
   blog: ShowcaseBlog
@@ -27,7 +24,7 @@ export function BlogListItem(props: BlogProps) {
 
   return (
     <div className="pb-6 flex flex-row">
-      <div className="pr-2 basis-1/4">
+      <div className="pr-4 w-[150px]">
         <Image
           src={imageUrl}
           alt={alt}
@@ -36,11 +33,12 @@ export function BlogListItem(props: BlogProps) {
           objectFit="contain"
         />
       </div>
-      <div className="pr-2">
-        {createdDate.toLocaleDateString('de-DE')}{' '}
+      <div className="pr-4 w-[100px]">
+        {createdDate.toLocaleDateString('de-DE')}
+        <br />
         {createdDate.toLocaleTimeString('de-DE')}
       </div>
-      <div>
+      <div className="basis-3/4">
         <TextBox blog={blog} />
       </div>
     </div>

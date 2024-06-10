@@ -19,7 +19,7 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
     <div className="space-y-20">
       {/* Header */}
       {title && <Header centered title={title} description={overview} />}
-      {/* Showcase projects */}
+      {/* Showcase Blogs */}
       {showcaseBlogs && showcaseBlogs.length > 0 && (
         <div className="flex flex-col items-center">
           <div className="w-5/6 lg:w-3/5">
