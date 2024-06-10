@@ -11,7 +11,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your project.',
+      description: 'This field is the title of your blog entry.',
       title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
@@ -30,7 +30,7 @@ export default defineType({
     defineField({
       name: 'overview',
       description:
-        'Used both for the <meta> description tag for SEO, and project subheader.',
+        'Used both for the <meta> description tag for SEO, and blog entry subheader.',
       title: 'Overview',
       type: 'array',
       of: [
@@ -61,7 +61,7 @@ export default defineType({
       title: 'Cover Image',
       icon: ImageIcon,
       description:
-        'This image will be used as the cover image for the project. If you choose to add it to the show case projects, this is the image displayed in the list within the homepage.',
+        'This image will be used as the cover image for the blog entry. If you choose to add it to the show case blog entries, this is the image displayed in the list within the homepage.',
       type: 'image',
       options: {
         hotspot: true,
@@ -138,10 +138,6 @@ export default defineType({
           styles: [],
         }),
         // Custom blocks
-        defineArrayMember({
-          name: 'timeline',
-          type: 'timeline',
-        }),
         defineField({
           type: 'image',
           icon: ImageIcon,
