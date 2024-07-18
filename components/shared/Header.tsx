@@ -1,14 +1,14 @@
-import { CustomPortableText } from '@/components/shared/CustomPortableText'
+import { CustomPortableText } from '@/components/shared/CustomPortableText';
 
 interface HeaderProps {
-  centered?: boolean
-  description?: any[]
-  title?: string
+  centered?: boolean;
+  description?: any[];
+  title?: string;
 }
 export function Header(props: HeaderProps) {
-  const { title, description, centered = false } = props
+  const { title, description, centered = false } = props;
   if (!description && !title) {
-    return null
+    return null;
   }
   return (
     <div
@@ -17,7 +17,10 @@ export function Header(props: HeaderProps) {
       <div className="w-5/6 lg:w-3/5">
         {/* Title */}
         {title && (
-          <div className="text-3xl font-alex md:text-5xl text-[#EE4286]">
+          <div
+            className="text-3xl font-alex md:text-5xl text-[#EE4286]"
+            data-testid="title"
+          >
             {title}
           </div>
         )}
@@ -29,5 +32,5 @@ export function Header(props: HeaderProps) {
         )}
       </div>
     </div>
-  )
+  );
 }

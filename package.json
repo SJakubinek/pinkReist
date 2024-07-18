@@ -4,15 +4,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "format": "npx prettier --write . --ignore-path .gitignore",
+    "fix": "yarn eslint . --fix",
+    "format": "yarn prettier --write . --ignore-path .gitignore",
     "lint": "next lint .",
     "lint:fix": "npm run format && npm run lint -- --fix",
     "start": "next start",
+    "test": "yarn playwright test",
     "type-check": "tsc --noEmit"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
   },
   "dependencies": {
     "@next/env": "14.2.2",
@@ -37,6 +35,8 @@
     "styled-components": "6.1.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.2",
+    "@types/node": "^20.14.11",
     "@types/react": "18.2.79",
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",

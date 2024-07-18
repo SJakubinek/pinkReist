@@ -1,5 +1,5 @@
-import { DocumentIcon, ImageIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { DocumentIcon, ImageIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
   type: 'document',
@@ -11,7 +11,7 @@ export default defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       type: 'slug',
@@ -20,7 +20,7 @@ export default defineType({
       options: {
         source: 'title',
       },
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'overview',
@@ -49,7 +49,7 @@ export default defineType({
           type: 'block',
         }),
       ],
-      validation: (rule) => rule.max(155).required(),
+      validation: rule => rule.max(155).required(),
     }),
     defineField({
       type: 'array',
@@ -130,7 +130,7 @@ export default defineType({
       return {
         subtitle: 'Page',
         title,
-      }
+      };
     },
   },
-})
+});
