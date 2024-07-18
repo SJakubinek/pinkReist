@@ -1,4 +1,4 @@
-const { theme } = require('@sanity/demo/tailwind')
+const { theme } = require('@sanity/demo/tailwind');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -20,4 +20,4 @@ module.exports = {
     backgroundColor: '#eadbcb',
   },
   plugins: [require('@tailwindcss/typography')],
-}
+};

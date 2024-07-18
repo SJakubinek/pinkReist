@@ -1,26 +1,26 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
-import { urlForImage } from '@/sanity/lib/utils'
-import type { ShowcaseBlog } from '@/types'
+import { urlForImage } from '@/sanity/lib/utils';
+import type { ShowcaseBlog } from '@/types';
 
 interface BlogProps {
-  blog: ShowcaseBlog
-  odd: number
+  blog: ShowcaseBlog;
+  odd: number;
 }
 
 export function BlogListItem(props: BlogProps) {
-  const { blog, odd } = props
-  const createdDate = new Date(blog.createdAt)
+  const { blog, odd } = props;
+  const createdDate = new Date(blog.createdAt);
   const imageUrl =
     (blog.coverImage &&
       urlForImage(blog.coverImage)
         ?.height(blog.coverImageHeight)
         .width(blog.coverImageWidth)
         .url()) ||
-    ''
+    '';
   const alt = blog.coverImageAlt
     ? blog.coverImageAlt
-    : blog.coverImageCaption ?? ''
+    : (blog.coverImageCaption ?? '');
 
   return (
     <div className="pb-6 flex flex-row">
@@ -42,12 +42,12 @@ export function BlogListItem(props: BlogProps) {
         <TextBox blog={blog} />
       </div>
     </div>
-  )
+  );
 }
 
 function TextBox({ blog }: { blog: ShowcaseBlog }) {
-  const text: string = blog.body[0].children[0].text
-  const trimmedText = text.substring(0, 350) + '...'
+  const text: string = blog.body[0].children[0].text;
+  const trimmedText = text.substring(0, 350) + '...';
   return (
     <div>
       <div>
@@ -69,5 +69,5 @@ function TextBox({ blog }: { blog: ShowcaseBlog }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

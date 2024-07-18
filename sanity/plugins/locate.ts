@@ -1,37 +1,37 @@
-import { map, Observable } from 'rxjs'
+import { map, Observable } from 'rxjs';
 import {
   DocumentLocationResolver,
   DocumentLocationsState,
-} from 'sanity/presentation'
+} from 'sanity/presentation';
 
-import { resolveHref } from '@/sanity/lib/utils'
+import { resolveHref } from '@/sanity/lib/utils';
 
 export const locate: DocumentLocationResolver = (params, context) => {
   if (params.type === 'settings') {
     return {
       message: 'This document is used on all pages',
       tone: 'caution',
-    } satisfies DocumentLocationsState
+    } satisfies DocumentLocationsState;
   }
 
   if (params.type === 'home' || params.type === 'page') {
     const doc$ = context.documentStore.listenQuery(
       `*[_id==$id || references($id)]{_type,slug,title}`,
       params,
-      { perspective: 'previewDrafts' },
+      { perspective: 'previewDrafts' }
     ) as Observable<
       | {
-          _type: string
-          slug: { current: string }
-          title: string | null
+          _type: string;
+          slug: { current: string };
+          title: string | null;
         }[]
       | null
-    >
+    >;
     return doc$.pipe(
       map((docs) => {
         const isReferencedBySettings = docs?.some(
-          (doc) => doc._type === 'settings',
-        )
+          (doc) => doc._type === 'settings'
+        );
         switch (params.type) {
           case 'home':
             return isReferencedBySettings
@@ -50,32 +50,32 @@ export const locate: DocumentLocationResolver = (params, context) => {
               : ({
                   tone: 'critical',
                   message: `The top menu isn't linking to the home page. This might make it difficult for visitors to navigate your site.`,
-                } satisfies DocumentLocationsState)
+                } satisfies DocumentLocationsState);
           case 'page':
             return {
               locations: docs
                 ?.map((doc) => {
-                  const href = resolveHref(doc._type, doc?.slug?.current)
+                  const href = resolveHref(doc._type, doc?.slug?.current);
                   return {
                     title: doc?.title || 'Untitled',
                     href: href!,
-                  }
+                  };
                 })
                 .filter((doc) => doc.href !== undefined),
               tone: isReferencedBySettings ? 'positive' : 'critical',
               message: isReferencedBySettings
                 ? 'The top menu is linking to this page'
                 : "The top menu isn't linking to this page. It can still be accessed if the visitor knows the URL.",
-            } satisfies DocumentLocationsState
+            } satisfies DocumentLocationsState;
           default:
             return {
               message: 'Unable to map document type to locations',
               tone: 'critical',
-            } satisfies DocumentLocationsState
+            } satisfies DocumentLocationsState;
         }
-      }),
-    )
+      })
+    );
   }
 
-  return null
-}
+  return null;
+};

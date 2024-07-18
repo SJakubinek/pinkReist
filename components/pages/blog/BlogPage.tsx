@@ -1,20 +1,21 @@
-import type { EncodeDataAttributeCallback } from '@sanity/react-loader'
+import type { EncodeDataAttributeCallback } from '@sanity/react-loader';
 
-import { CustomPortableText } from '@/components/shared/CustomPortableText'
-import { Header } from '@/components/shared/Header'
-import ImageBox from '@/components/shared/ImageBox'
-import type { BlogPayload } from '@/types'
+import { CustomPortableText } from '@/components/shared/CustomPortableText';
+import { Header } from '@/components/shared/Header';
+import ImageBox from '@/components/shared/ImageBox';
+import type { BlogPayload } from '@/types';
 
 export interface BlogPageProps {
-  data: BlogPayload
-  encodeDataAttribute?: EncodeDataAttributeCallback
+  data: BlogPayload;
+  encodeDataAttribute?: EncodeDataAttributeCallback;
 }
 
 export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { title, coverImage, coverImageAlt, createdAt, tags, body } = data ?? {}
+  const { title, coverImage, coverImageAlt, createdAt, tags, body } =
+    data ?? {};
 
-  const createdDate = new Date(createdAt)
+  const createdDate = new Date(createdAt);
   return (
     <div className="flex flex-col items-center">
       <div className="w-5/6 lg:w-3/5">
@@ -64,7 +65,7 @@ export function BlogPage({ data, encodeDataAttribute }: BlogPageProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default BlogPage
+export default BlogPage;

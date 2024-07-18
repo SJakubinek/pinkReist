@@ -1,58 +1,58 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { memo, useSyncExternalStore } from 'react'
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { memo, useSyncExternalStore } from 'react';
 
-import { studioUrl } from '@/sanity/lib/api'
+import { studioUrl } from '@/sanity/lib/api';
 
-import cover from './cover.png'
+import cover from './cover.png';
 
-const subscribe = () => () => {}
+const subscribe = () => () => {};
 function useAfterHydration<Snapshot>(
   getSnapshot: () => Snapshot,
-  serverSnapshot: Snapshot,
+  serverSnapshot: Snapshot
 ): Snapshot {
   return useSyncExternalStore<Snapshot>(
     subscribe,
     getSnapshot,
-    () => serverSnapshot,
-  )
+    () => serverSnapshot
+  );
 }
 
 export default memo(function IntroTemplate() {
   const studioURL = useAfterHydration(
     () => `${location.origin}${studioUrl}`,
-    null,
-  )
+    null
+  );
   const isLocalHost = useAfterHydration(
     () => window.location.hostname === 'localhost',
-    false,
-  )
+    false
+  );
   const hasUTMtags = useAfterHydration(
     () => window.location.search.includes('utm'),
-    false,
-  )
-  const pathname = usePathname()
+    false
+  );
+  const pathname = usePathname();
 
-  const hasEnvFile = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const hasEnvFile = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const hasRepoEnvVars =
     process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER &&
     process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER &&
-    process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG
-  const repoURL = `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`
+    process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG;
+  const repoURL = `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}`;
   const removeBlockURL = hasRepoEnvVars
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER}.com/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}/blob/main/README.md#how-can-i-remove-the-next-steps-block-from-my-app`
-    : `https://github.com/sanity-io/template-nextjs-clean#how-can-i-remove-the-next-steps-block-from-my-app`
+    : `https://github.com/sanity-io/template-nextjs-clean#how-can-i-remove-the-next-steps-block-from-my-app`;
 
   // Only display this on the home page
   if (pathname !== '/') {
-    return null
+    return null;
   }
 
   if (hasUTMtags || !studioURL) {
-    return null
+    return null;
   }
 
   return (
@@ -206,15 +206,15 @@ export default memo(function IntroTemplate() {
         </div>
       </div>
     </div>
-  )
-})
+  );
+});
 
 function Box({
   circleTitle,
   element,
 }: {
-  circleTitle: string
-  element: JSX.Element
+  circleTitle: string;
+  element: JSX.Element;
 }) {
   return (
     <li className="mt-2 grid grid-flow-col grid-rows-1 place-content-start gap-3">
@@ -225,7 +225,7 @@ function Box({
       </div>
       {element}
     </li>
-  )
+  );
 }
 
 function BlueLink({ href, text }: { href: string; text: string }) {
@@ -238,7 +238,7 @@ function BlueLink({ href, text }: { href: string; text: string }) {
     >
       {text}
     </a>
-  )
+  );
 }
 
 const RemoveBlock = ({ url }: { url: string }) => (
@@ -250,15 +250,15 @@ const RemoveBlock = ({ url }: { url: string }) => (
   >
     How to remove this block?
   </a>
-)
+);
 
 function getGitProvider() {
   switch (process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER) {
     case 'gitlab':
-      return 'GitLab'
+      return 'GitLab';
     case 'bitbucket':
-      return 'Bitbucket'
+      return 'Bitbucket';
     default:
-      return 'GitHub'
+      return 'GitHub';
   }
 }
