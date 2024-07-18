@@ -24,20 +24,24 @@ export default function ImageBox({
   const imageUrl =
     image && urlForImage(image)?.height(height).width(width).fit('crop').url();
 
+  const linkURL = image && urlForImage(image)?.url();
+
   return (
     <div
       className={`overflow-hidden rounded-[3px] bg-gray-50 ${classesWrapper}`}
       data-sanity={props['data-sanity']}
     >
       {imageUrl && (
-        <Image
-          //className="h-full w-full"
-          alt={alt}
-          width={width}
-          height={height}
-          sizes={size}
-          src={imageUrl}
-        />
+        <a href={linkURL} target="_blank">
+          <Image
+            //className="h-full w-full"
+            alt={alt}
+            width={width}
+            height={height}
+            sizes={size}
+            src={imageUrl}
+          />
+        </a>
       )}
     </div>
   );
