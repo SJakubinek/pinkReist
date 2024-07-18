@@ -28,9 +28,9 @@ export const locate: DocumentLocationResolver = (params, context) => {
       | null
     >;
     return doc$.pipe(
-      map(docs => {
+      map((docs) => {
         const isReferencedBySettings = docs?.some(
-          doc => doc._type === 'settings'
+          (doc) => doc._type === 'settings'
         );
         switch (params.type) {
           case 'home':
@@ -39,7 +39,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
                   locations: [
                     {
                       title:
-                        docs?.find(doc => doc._type === 'home')?.title ||
+                        docs?.find((doc) => doc._type === 'home')?.title ||
                         'Home',
                       href: resolveHref(params.type)!,
                     },
@@ -54,14 +54,14 @@ export const locate: DocumentLocationResolver = (params, context) => {
           case 'page':
             return {
               locations: docs
-                ?.map(doc => {
+                ?.map((doc) => {
                   const href = resolveHref(doc._type, doc?.slug?.current);
                   return {
                     title: doc?.title || 'Untitled',
                     href: href!,
                   };
                 })
-                .filter(doc => doc.href !== undefined),
+                .filter((doc) => doc.href !== undefined),
               tone: isReferencedBySettings ? 'positive' : 'critical',
               message: isReferencedBySettings
                 ? 'The top menu is linking to this page'

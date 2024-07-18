@@ -20,7 +20,7 @@ export function BlogListItem(props: BlogProps) {
     '';
   const alt = blog.coverImageAlt
     ? blog.coverImageAlt
-    : blog.coverImageCaption ?? '';
+    : (blog.coverImageCaption ?? '');
 
   return (
     <div className="pb-6 flex flex-row">

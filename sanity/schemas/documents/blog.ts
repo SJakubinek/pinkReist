@@ -14,7 +14,7 @@ export default defineType({
       description: 'This field is the title of your blog entry.',
       title: 'Title',
       type: 'string',
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -25,7 +25,7 @@ export default defineType({
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'overview',
@@ -54,7 +54,7 @@ export default defineType({
           type: 'block',
         }),
       ],
-      validation: rule => rule.max(155).warning('Less than 155 characters'),
+      validation: (rule) => rule.max(155).warning('Less than 155 characters'),
     }),
     defineField({
       name: 'coverImage',
@@ -66,7 +66,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       title: 'Cover Image Caption',
@@ -84,13 +84,13 @@ export default defineType({
       name: 'coverImageWidth',
       type: 'number',
       title: 'Cover Image Width',
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'coverImageHeight',
       type: 'number',
       title: 'Cover Image Height',
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'createdAt',
@@ -100,7 +100,7 @@ export default defineType({
         dateFormat: 'DD-MM-YYYY',
         timeFormat: 'HH:mm',
       },
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'tags',
@@ -115,7 +115,7 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'array',
-      validation: rule => rule.required(),
+      validation: (rule) => rule.required(),
       of: [
         defineArrayMember({
           type: 'block',

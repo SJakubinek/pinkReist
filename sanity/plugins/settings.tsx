@@ -14,7 +14,7 @@ export const singletonPlugin = (types: string[]) => {
       newDocumentOptions: (prev, { creationContext }) => {
         if (creationContext.type === 'global') {
           return prev.filter(
-            templateItem => !types.includes(templateItem.templateId)
+            (templateItem) => !types.includes(templateItem.templateId)
           );
         }
 
@@ -37,10 +37,10 @@ export const singletonPlugin = (types: string[]) => {
 export const pageStructure = (
   typeDefArray: DocumentDefinition[]
 ): StructureResolver => {
-  return S => {
+  return (S) => {
     // Goes through all of the singletons that were provided and translates them into something the
     // Desktool can understand
-    const singletonItems = typeDefArray.map(typeDef => {
+    const singletonItems = typeDefArray.map((typeDef) => {
       return S.listItem()
         .title(typeDef.title!)
         .icon(typeDef.icon)
@@ -54,8 +54,8 @@ export const pageStructure = (
 
     // The default root list items (except custom ones)
     const defaultListItems = S.documentTypeListItems().filter(
-      listItem =>
-        !typeDefArray.find(singleton => singleton.name === listItem.getId())
+      (listItem) =>
+        !typeDefArray.find((singleton) => singleton.name === listItem.getId())
     );
 
     return S.list()
