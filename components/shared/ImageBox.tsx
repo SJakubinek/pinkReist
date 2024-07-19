@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { urlForImage } from '@/sanity/lib/utils';
+import Link from 'next/link';
 
 interface ImageBoxProps {
   image?: { asset?: any };
@@ -24,7 +25,7 @@ export default function ImageBox({
   const imageUrl =
     image && urlForImage(image)?.height(height).width(width).fit('crop').url();
 
-  const linkURL = image && urlForImage(image)?.url();
+  const linkURL = (image && urlForImage(image)?.url()) || '';
 
   return (
     <div
@@ -32,7 +33,7 @@ export default function ImageBox({
       data-sanity={props['data-sanity']}
     >
       {imageUrl && (
-        <a href={linkURL} target="_blank">
+        <Link href={linkURL} target="_blank">
           <Image
             //className="h-full w-full"
             alt={alt}
@@ -41,7 +42,7 @@ export default function ImageBox({
             sizes={size}
             src={imageUrl}
           />
-        </a>
+        </Link>
       )}
     </div>
   );
