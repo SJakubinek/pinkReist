@@ -22,8 +22,8 @@ function usePagination(items, startPage, perPage) {
 
   return {
     activePage,
-    nextPage: () => setActivePage((p) => (p < totalPages ? p + 1 : p)),
-    previousPage: () => setActivePage((p) => (p > 1 ? p - 1 : p)),
+    nextPage: () => setActivePage(p => (p < totalPages ? p + 1 : p)),
+    previousPage: () => setActivePage(p => (p > 1 ? p - 1 : p)),
     totalPages,
     totalItems: items.length,
     items: paginatedItems,
@@ -71,12 +71,20 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
           </div>
           <div className="grid grid-cols-2 space-x-6">
             <div>
-              <button onClick={previousPage} disabled={activePage <= 1}>
+              <button
+                onClick={previousPage}
+                disabled={activePage <= 1}
+                className="disabled:hidden"
+              >
                 Neuere Einträge
               </button>
             </div>
             <div>
-              <button onClick={nextPage} disabled={activePage >= totalPages}>
+              <button
+                onClick={nextPage}
+                disabled={activePage >= totalPages}
+                className="disabled:hidden"
+              >
                 Ältere Einträge
               </button>
             </div>
