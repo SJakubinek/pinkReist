@@ -30,7 +30,7 @@ export function BlogListItem(props: BlogProps) {
           alt={alt}
           width={100}
           height={100}
-          objectFit="contain"
+          style={{ objectFit: 'contain' }}
         />
       </div>
       <div className="pr-4 w-[100px]">
