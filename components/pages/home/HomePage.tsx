@@ -6,11 +6,12 @@ import Link from 'next/link';
 import { BlogListItem } from '@/components/pages/home/BlogListItem';
 import { Header } from '@/components/shared/Header';
 import { resolveHref } from '@/sanity/lib/utils';
-import type { HomePagePayload } from '@/types';
+import type { blogEntry, HomePagePayload } from '@/types';
 import { useState } from 'react';
 
 export interface HomePageProps {
   data: HomePagePayload | null;
+  allBlogEntries?: blogEntry[] | null;
   encodeDataAttribute?: EncodeDataAttributeCallback;
 }
 
@@ -30,12 +31,16 @@ function usePagination(items, startPage, perPage) {
   };
 }
 
-export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
+export function HomePage({
+  data,
+  allBlogEntries,
+  encodeDataAttribute,
+}: HomePageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { overview = [], showcaseBlogs = [], title = '' } = data ?? {};
+  const { overview = [], title = '' } = data ?? {};
 
   const { activePage, nextPage, previousPage, totalPages, totalItems, items } =
-    usePagination(showcaseBlogs, 1, 15);
+    usePagination(allBlogEntries, 1, 15);
 
   return (
     <div className="space-y-20">

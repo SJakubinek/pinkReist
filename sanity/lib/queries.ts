@@ -4,6 +4,7 @@ export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
     overview,
+    title,
     showcaseBlogs[]->{
       _type,
       body,
@@ -17,8 +18,7 @@ export const homePageQuery = groq`
       "slug": slug.current,
       tags,
       title,
-    },
-    title,
+    }
   }
 `;
 
@@ -58,5 +58,22 @@ export const settingsQuery = groq`
       title
     },
     ogImage,
+  }
+`;
+
+export const allBlogEntriesQuery = groq`
+  *[_type == "blog"] | order(_createdAt desc){
+    _type,
+    body,
+    coverImage,
+    coverImageCaption,
+    coverImageAlt,
+    coverImageWidth,
+    coverImageHeight,
+    createdAt,
+    overview,
+    "slug": slug.current,
+    tags,
+    title,
   }
 `;

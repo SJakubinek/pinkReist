@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
 import { urlForImage } from '@/sanity/lib/utils';
-import type { ShowcaseBlog } from '@/types';
+import type { blogEntry } from '@/types';
 
 interface BlogProps {
-  blog: ShowcaseBlog;
+  blog: blogEntry;
   odd: number;
 }
 
@@ -45,7 +45,7 @@ export function BlogListItem(props: BlogProps) {
   );
 }
 
-function TextBox({ blog }: { blog: ShowcaseBlog }) {
+function TextBox({ blog }: { blog: blogEntry }) {
   const text: string = blog.body[0].children[0].text;
   const trimmedText = text.substring(0, 350) + '...';
   return (
