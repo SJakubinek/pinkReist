@@ -7,7 +7,22 @@ export interface MenuItem {
   title?: string;
 }
 
-export interface ShowcaseBlog {
+export interface HomePagePayload {
+  footer?: PortableTextBlock[];
+  overview?: PortableTextBlock[];
+  title?: string;
+  showcaseBlogs?: blogEntry[];
+}
+
+export interface PagePayload {
+  body?: PortableTextBlock[];
+  name?: string;
+  overview?: PortableTextBlock[];
+  title?: string;
+  slug?: string;
+}
+
+export interface blogEntry {
   _type: string;
   title: string;
   slug: string;
@@ -20,23 +35,6 @@ export interface ShowcaseBlog {
   createdAt: string;
   tags?: string[];
   body: PortableTextBlock[];
-}
-
-// Page payloads
-
-export interface HomePagePayload {
-  footer?: PortableTextBlock[];
-  overview?: PortableTextBlock[];
-  showcaseBlogs?: ShowcaseBlog[];
-  title?: string;
-}
-
-export interface PagePayload {
-  body?: PortableTextBlock[];
-  name?: string;
-  overview?: PortableTextBlock[];
-  title?: string;
-  slug?: string;
 }
 
 export interface BlogPayload {

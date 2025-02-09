@@ -5,6 +5,7 @@ import { draftMode } from 'next/headers';
 
 import { client } from '@/sanity/lib/client';
 import {
+  allBlogEntriesQuery,
   blogBySlugQuery,
   homePageQuery,
   pagesBySlugQuery,
@@ -12,6 +13,7 @@ import {
 } from '@/sanity/lib/queries';
 import { token } from '@/sanity/lib/token';
 import {
+  blogEntry,
   BlogPayload,
   HomePagePayload,
   PagePayload,
@@ -91,5 +93,13 @@ export function loadBlog(slug: string) {
     blogBySlugQuery,
     { slug },
     { next: { tags: [`blog:${slug}`] } }
+  );
+}
+
+export function loadAllBlogEntries() {
+  return loadQuery<blogEntry[] | null>(
+    allBlogEntriesQuery,
+    {},
+    { next: { tags: ['blog'] } }
   );
 }
