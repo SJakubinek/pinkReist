@@ -62,7 +62,7 @@ export const settingsQuery = groq`
 `;
 
 export const allBlogEntriesQuery = groq`
-  *[_type == "blog"] | order(_createdAt desc){
+  *[_type == "blog"] | order(createdAt desc){
     _type,
     body,
     coverImage,
